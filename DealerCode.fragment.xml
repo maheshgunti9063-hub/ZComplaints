@@ -1,0 +1,17 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <SelectDialog
+        title="Dealer Codes"
+        items="{ComplaintsModel>/DealerData}"
+        search="_handleValueHelpSearch"
+        contentHeight="150px"
+        growing="true"
+        growingThreshold="10"
+        confirm="onSelectDealer"
+        cancel="_handleValueHelpClose">
+        <StandardListItem
+            title="{ComplaintsModel>Dealer}"
+            description="{ComplaintsModel>Dealer_desc}"/>
+    </SelectDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,828 @@
+<mvc:View
+    controllerName="dicv.zcomplaintsmangt.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:upload="sap.m.upload"
+    xmlns:unified="sap.ui.unified">
+    <Page
+        id="page"
+        title="{i18n>title}"
+        titleAlignment="Center">
+        <content>
+            <VBox
+                id="IdVBox"
+                class="sapUiSmallMargin"
+            >
+                <f:SimpleForm
+                    id="SimpleFormChange480_Trial"
+                    editable="true"
+                    layout="ResponsiveGridLayout"
+                    title="{ComplaintsModel>/VIN} | {ComplaintsModel>/Complaint_Id}"
+                    labelSpanXL="4"
+                    labelSpanL="4"
+                    labelSpanM="4"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="0"
+                    emptySpanL="0"
+                    emptySpanM="0"
+                    emptySpanS="0"
+                    columnsXL="3"
+                    columnsL="2"
+                    columnsM="2"
+                    singleContainerFullSize="false"
+                >
+                    <f:content>
+                    <core:Title
+                            text="Complaint Details"
+                        />
+                        <Label
+                            id="_IDGenLabel10"
+                            text="Area"
+                            required="true"
+                        />
+                        <ComboBox
+                            id="Area_Id"
+                            value="{ComplaintsModel>/Area}"
+                            items="{ComplaintsModel>/AreaData}"
+                            change="onSelectArea"
+                        >
+                            <core:Item
+                                id="_IDGenItem2"
+                                key="{ComplaintsModel>Area}"
+                                text="{ComplaintsModel>Area}"
+                            />
+                        </ComboBox>
+                        <Label
+                            id="_IDGenLabel11"
+                            text="Sub Area"
+                            required="true"
+                        />
+                        <ComboBox
+                            id="SubAr_Id"
+                            items="{path: 'ComplaintsModel>/SubAreaData',
+					        sorter: { path: 'SubArea' }	}"
+                            change="onSelectSubArea"
+                        >
+                            <core:Item
+                                id="_IDGenItem3"
+                                key="{ComplaintsModel>SubArea}"
+                                text="{ComplaintsModel>SubArea}"
+                            />
+                        </ComboBox>
+                        <Label
+                            id="OffRdLctnLbl_Id"
+                            text="Off Road Location"
+                            required="false"
+                        />
+                        <Input
+                            id="OffRdLctn_Id"
+                            value="{ComplaintsModel>/OffRoadLocation}"
+                            enabled="{ComplaintsModel>/VisibleFileds}"
+                        />
+                        <Label
+                            id="LadCrrdLbl_Id"
+                            text="Load Carried"
+                            required="false"
+                        />
+                        <Input
+                            id="LoadCrrd_Id"
+                            value="{ComplaintsModel>/LoadCarried}"
+                            enabled="{ComplaintsModel>/VisibleFileds}"
+                        />
+                        <Label
+                            id="TypeRuteLbl_Id"
+                            text="Type Of Route"
+                            required="false"
+                        />
+                        <Input
+                            id="TypeRout_Id"
+                            value="{ComplaintsModel>/TypeOfRoute}"
+                            enabled="{ComplaintsModel>/VisibleFileds}"
+                        />
+                        <Label
+                            text="Trip Kms"
+                            required="false"
+                            visible="{= ${ComplaintsModel>/Area} === 'RSA/Off Road' ? true : false}"
+                        />
+                        <Input
+                            liveChange="onChangeDistnc"
+                            placeholder="Enter numbers Only"
+                            value="{ComplaintsModel>/DistanceinKM}"
+                            visible="{= ${ComplaintsModel>/Area} === 'RSA/Off Road' ? true : false}"
+                            editable="false"
+                        />
+                        <Label
+                            id="DistnLbl_Id"
+                            text="Distance"
+                            required="false"
+                            visible="{= ${ComplaintsModel>/Area} === 'RSA/Off Road' ? false : true}"
+                        />
+                        <Input
+                            id="Distnc_Id"
+                            liveChange="onChangeDistnc"
+                            placeholder="Enter numbers Only"
+                            value="{ComplaintsModel>/DistanceinKM}"
+                            enabled="{ComplaintsModel>/VisibleFileds}"
+                            visible="{= ${ComplaintsModel>/Area} === 'RSA/Off Road' ? false : true}"
+                        />
+                        <Label
+                            id="_IDGenLabel16"
+                            text="Caller Name"
+                            required="true"
+                        />
+                        <Input
+                            id="CalerName_ID"
+                            value="{ComplaintsModel>/CallerName}"
+                            enabled="{ComplaintsModel>/VisibleFileds}"
+                        />
+                        <Label
+                            id="_IDGenLabel17"
+                            text="Caller Contact Number"
+                            required="true"
+                        />
+                        <HBox>
+                        <Input
+                            id="_IDGenInput11"
+                            value="{ComplaintsModel>/CallercontactNumber}"
+                            type="Tel"
+                            placeholder="Enter numbers only"
+                            maxLength="10"
+                            liveChange="onChangeNumber"
+                            showClearIcon="true"
+                            valueStateText="Enter Numbers Only"
+                            enabled="{ComplaintsModel>/VisibleFileds}"
+                            class="sapUiSmallMarginEnd"
+                        />
+                        <Button text="Get Breakdown Loc" press="onBrkdwnLocatn" class="sapUiSmallMarginBegin"
+                             visible="{parts: [{path:'ComplaintsModel>/Area'},
+                             {path:'ComplaintsModel>/MSVReachDate'}], formatter:'.formatter.formatGetBrkdwnBtn'}"/>
+                            </HBox>
+                        <Label
+                            id="_IDGenLabel18"
+                            text="SMS Current Caller"
+                            required="false"
+                        />
+                        <Input
+                            id="_IDGenInput12"
+                            value="{ComplaintsModel>/SMSCurrentCaller}"
+                            liveChange="onChangeNumber"
+                            showClearIcon="true"
+                            valueStateText="Enter Numbers Only"
+                            type="Tel"
+                            placeholder="Enter numbers Only"
+                            maxLength="10"
+                            editable="{ComplaintsModel>/VisibleFileds}"
+                        />                      
+                           <Label
+                            id="_IDGenLabel38"
+                            text="BD latitude"
+                            required="false"
+                           />  
+                            <Input
+                            id="bdlat_Id"
+                            value="{ComplaintsModel>/ZZ1_BD_latitude}"
+                            enabled="{ComplaintsModel>/VisibleFileds}"
+                        />
+                          <Label
+                            id="_BDlongid"
+                            text="BD longitude "
+                            required="false"
+                           />  
+                            <Input
+                            id="bdlong_Id"
+                            value="{ComplaintsModel>/ZZ1_BD_longitude}"
+                            enabled="{ComplaintsModel>/VisibleFileds}"
+                        /> 
+                        <core:Title
+                            id="_IDGenTitle"
+                            text="Dealer Information"
+                        />
+                        <Label
+                            id="_IDGenLabel"
+                            text="Servicing Dealer"
+                        />
+                        <Input
+                            id="ServcDelr_Id"
+                            value="{ComplaintsModel>/ServicingDealer}"
+                            editable="false"
+                        />
+                        <Label
+                            id="DlrLabel_Id"
+                            required="false"
+                            text="Dealer Code"
+                        />
+                        <Input
+                            id="DelrDcod_Id"
+                            showValueHelp="true"
+                            valueHelpRequest="handleValueHelp"
+                            liveChange="onValueUpdate"
+                            value="{ComplaintsModel>/DealerCode}"
+                            enabled="{= (${ComplaintsModel>/Area} === 'RSA/Off Road') || (${ComplaintsModel>/VisibleFileds} === 'false') ? false : true}"
+                            
+                        />
+                        <Label
+                            id="_IDGenLabel2"
+                            text="Dealer City"
+                        />
+                        <Input
+                            id="_IDGenInput"
+                            value="{ComplaintsModel>/DealerCity}"
+                            editable="false"
+                        />
+                        <Label
+                            id="_IDGenLabel3"
+                            text="Assigned Date"
+                        />
+                        <DatePicker
+                            id="AsgnDte_Id"
+                            value="{ComplaintsModel>/AssignedDate}"
+                            placeholder="Enter Date"
+                            editable="false"
+                        />
+                        <Label
+                            id="_IDGenLabel4"
+                            text="Assigned Time"
+                        />
+                        <TimePicker
+                            id="AsgnTime_Id"
+                            value="{ComplaintsModel>/AssignedTime}"
+                            displayFormat="hh:mm:ss a"
+                            valueFormat="hh:mm:ss a"
+                            placeholder="Enter Time"
+                            editable="false"
+                        />
+                        <Label
+                            id="_IDGenLabel5"
+                            text="JobCard Number"
+                        />
+                        <Input
+                            id="_IDGenInput3"
+                            value="{ComplaintsModel>/JobCardNumber}"
+                            editable="false"
+                        />
+                        <Label
+                            id="_IDGenLabel6"
+                            text="JobCard OpenDate"
+                        />
+                        <Input
+                            id="_IDGenInput4"
+                            value="{ComplaintsModel>/JobCardOpenDate}"
+                            editable="false"
+                        />
+                        <Label
+                            id="_IDGenLabel7"
+                            text="JobCard Status"
+                        />
+                        <Input
+                            id="_IDGenInput5"
+                            value="{ComplaintsModel>/JobCardStatus}"
+                            editable="false"
+                        />
+                         <Label
+                            id="_IDkam"
+                            text="KAM Flag "
+                        />
+                        <Input
+                            id="IDkamflag"
+                            value="{ComplaintsModel>/ZZ1_KAM_Flag}"
+                            editable="false"
+                        />
+                        <Label
+                            id="distacebd_ws"
+                            text="Distance from BD to WS "
+                            required="false"
+                        />
+                        <Input 
+                               id="_IDbdtows"
+                               value="{ComplaintsModel>/ZZ1_Dist_From_BD_To_WS}"
+                               editable="false"
+                               />
+                        <Label text=""/>
+                        <Button text="Get Nearby Locations"
+                        width="200px"
+                        press="onnearbyloc" visible="{= ${ComplaintsModel>/Area} === 'RSA/Off Road' ? true : false}"/>
+
+                        <core:Title
+                            id="_IDGenTitle1"
+                            text="Customer Concern"
+                        />
+                        <Label
+                            id="_IDGenLabel8"
+                            text="Complaint Description"
+                            required="true"
+                        />
+                        <TextArea
+                            id="CmplntDesc_Id"
+                            value="{ComplaintsModel>/ComplaintDescription}"
+                            maxLength="200"
+                            showExceededText="false"
+                            growing="true" growingMaxLines="4"
+                            liveChange="onTextAreaVal"
+                            enabled="{ComplaintsModel>/VisibleFileds}"
+                        />
+                      <Label
+                            id="Aggregate_Id"
+                            text="Aggregate"
+                            required="false"
+                        />
+                        <ComboBox
+                            id="sAgrgte_Id"
+                            items="{ComplaintsModel>/AgrgteData}"
+                            value="{ComplaintsModel>/Aggregate}"
+                            enabled="{ComplaintsModel>/VisibleFileds}"
+                        >
+                            <core:Item
+                                id="_IDGenItem21"
+                                key="{ComplaintsModel>Aggregate}"
+                                text="{ComplaintsModel>Aggregate}"
+                            />
+                        </ComboBox>
+                        <Label
+                            id="ActknLabl_Id"
+                            text="Action Taken"
+                            required="false"
+                        />
+                        <Input
+                            id="ActnTkn_Id"
+                            value="{ComplaintsModel>/ActionTaken}"
+                            maxLength="200"
+                            enabled="{= ${ComplaintsModel>/Area} === 'RSA/Off Road' ? false : true}"
+                        />
+                        <Label
+                            id="_IDGenLabel28"
+                            text="Status"
+                            required="true"
+                        />
+                        <HBox>
+                        <Input id='RsaStatus_Id' value="{ComplaintsModel>/RSAStatus}" visible="false" editable="false"></Input>
+                        <Select
+                            id="Status_Id"
+                            change="onClickStatus"
+                            visible="true"
+                        >
+                            <core:Item
+                                id="_IDGenItem"
+                                key="E0001"
+                                text="New / Open"
+                                enabled="{= (${ComplaintsModel>/Status} === undefined) || (${ComplaintsModel>/Status} === 'New / Open') ? true : false}"
+                            />
+                            <core:Item
+                                id="_IDGenItem1"
+                                key="E0010"
+                                text="Awaiting Inspection"
+                                enabled="{= (${ComplaintsModel>/Status} === 'New / Open') || (${ComplaintsModel>/Status} === 'Awaiting Inspection') ? true : false}"
+                            />
+                            <core:Item
+                                id="_IDGenItem8"
+                                key="E0002"
+                                text="Work In Progress"
+                                enabled="{= (${ComplaintsModel>/Status} === 'Awaiting Inspection') || (${ComplaintsModel>/Status} === 'Work In Progress') || (${ComplaintsModel>/Status} === 'Hold') || (${ComplaintsModel>/Status} === 'Reopen') ? true : false}"
+                            />
+                            <core:Item
+                                id="_IDGenItem10"
+                                key="E0011"
+                                text="Hold"
+                                enabled="{= (${ComplaintsModel>/Status} === 'Work In Progress') || (${ComplaintsModel>/Status} === 'Hold') || (${ComplaintsModel>/Status} === 'Awaiting Inspection') || (${ComplaintsModel>/Status} === 'Reopen') ? true : false}"
+                            />
+                            <core:Item
+                                id="_IDGenItem9"
+                                key="E0004"
+                                text="Vehicle Delivered"
+                                enabled="{= (${ComplaintsModel>/Status} === 'Work In Progress') || (${ComplaintsModel>/Status} === 'Vehicle Delivered') || (${ComplaintsModel>/Status} === 'Hold') ? true : false}"
+                            />
+                            <core:Item
+                                id="_IDGenItem11"
+                                key="E0005"
+                                text="Closed"
+                                enabled="{= (${ComplaintsModel>/Status} !== 'Vehicle Delivered') || (${ComplaintsModel>/Status} !== 'Closed') || (${ComplaintsModel>/Status} !== 'Reopen') ? true : false}"
+                            />
+                            <core:Item
+                                id="_IDGenItem12"
+                                key="E0006"
+                                text="Canceled"
+                                enabled="{= (${ComplaintsModel>/Dealer_Ind} === 'X') &amp;&amp; (${ComplaintsModel>/Area} === 'SSI') ? false : true}"
+                               
+                            />
+                            <core:Item
+                                id="_IDGenItem13"
+                                key="E0017"
+                                text="Reopen"
+                                enabled="{= (${ComplaintsModel>/Status} === 'Closed') || (${ComplaintsModel>/Status} === 'Canceled') || (${ComplaintsModel>/Status} === 'Reopen') ? true : false}"
+                            />                            
+                        </Select>
+                        </HBox>
+                        <Label
+                            id="caller"
+                            text="Caller Designation "
+                            required="{= ${ComplaintsModel>/Area} === 'RSA/Off Road' ? true : false}"
+                        />
+
+                            <ComboBox
+                            id="callerDesgtn_id"
+                            items="{ComplaintsModel>/CallerDesignationData}"
+                            value="{ComplaintsModel>/ZZ1_Caller_Designation}"
+                            enabled="{ComplaintsModel>/VisibleFileds}"
+                            >
+                            <core:Item
+                                id="_callerid"
+                                key="{ComplaintsModel>ZZ1_Caller_Designation_srh}"
+                                text="{ComplaintsModel>ZZ1_Caller_Designation_srh}"
+                            />
+                        </ComboBox>
+                        <core:Title
+                            id="_IDGenTitle3"
+                            text="More Complaint Details"
+                        />
+                        <Label
+                            id="_IDGenLabel19"
+                            text="Complaint Source"
+                            required="true"
+                        />
+                        <ComboBox
+                            id="Csource_Id"
+                            items="{path: 'ComplaintsModel>/SourecData',
+					sorter: { path: 'ComplaintSource' }	}"
+                            change="onSelectSource"
+                            editable="{ComplaintsModel>/VisibleFileds}"
+                        >
+                            <core:Item
+                                id="_IDGenItem4"
+                                key="{ComplaintsModel>ComplaintSource}"
+                                text="{ComplaintsModel>ComplaintSource}"
+                            />
+                        </ComboBox>
+                        <Label
+                            id="_IDGenLabel20"
+                            text="Complaint Mode"
+                            required="true"
+                        />
+                        <ComboBox
+                            id="CmplntM_Id"
+                            items="{path: 'ComplaintsModel>/ModeData',
+					sorter: { path: 'ComplaintMode' }}"
+                            change="onSelectMode"
+                            editable="{ComplaintsModel>/VisibleFileds}"
+                        >
+                            <core:Item
+                                id="_IDGenItem5"
+                                key="{ComplaintsModel>ComplaintMode}"
+                                text="{ComplaintsModel>ComplaintMode}"
+                            />
+                        </ComboBox>
+                        <Label
+                            id="_IDGenLabel21"
+                            text="Open Date"
+                            required="true"
+                        />
+                        <DatePicker
+                            id="ODate_Id"
+                            value="{ComplaintsModel>/OpenDate}"
+                            placeholder="Enter Date"
+                            editable="true"
+                            change="onODateChange"
+                        />
+                        <Label
+                            id="_IDGenLabel22"
+                            text="Open Time"
+                            required="true"
+                        />
+                        <TimePicker
+                            id="OTime_Id"
+                            value="{ComplaintsModel>/OpenTime}"
+                            displayFormat="hh:mm:ss a"
+                            valueFormat="hh:mm:ss a"
+                            placeholder="Enter Time"
+                            editable="true"
+                            change="onOTimeChange"
+                        />
+                        <Label
+                            id="holdRsnLbl_Id"
+                            text="Hold Reason"
+                            required="false"
+                        />
+                        <ComboBox
+                            id="HoldRsn_Id"
+                            enabled="{ComplaintsModel>/HoldVisible}"
+                            items="{ path: 'ComplaintsModel>/HoldData',
+					sorter: { path: 'HoldReason' }}"
+                        >
+                            <core:Item
+                                id="_IDGenItem6"
+                                key="{ComplaintsModel>HoldReason}"
+                                text="{ComplaintsModel>HoldReason}"
+                            />
+                        </ComboBox>
+                        <Label
+                            id="BillTypLabel_Id"
+                            text="Bill To Type"
+                            required="false"
+                        />
+                        <ComboBox
+                            id="BillTyp_Id"
+                            items="{path: 'ComplaintsModel>/BillTypeData',
+					sorter: { path: 'BillToType' }
+				}"
+                            editable="{ComplaintsModel>/VisibleFileds}"
+                        >
+                            <core:Item
+                                id="_IDGenItem7"
+                                key="{ComplaintsModel>BillToType}"
+                                text="{ComplaintsModel>BillToType}"
+                            />
+                        </ComboBox>
+                        <Label
+                            id="_IDGenLabel25"
+                            text="Cost Estimation"
+                        />
+                        <Input
+                            id="_IDGenInput13"
+                            value="{ComplaintsModel>/CostEstimation}"
+                            editable="{ComplaintsModel>/VisibleFileds}"
+                        />
+                        <Label
+                            id="_IDGenLabel26"
+                            text="Resolved Date"
+                        />
+                        <DatePicker
+                            id="ReslvDate_Id"
+                            value="{ComplaintsModel>/ResolvedDate}"
+                            placeholder="Enter Date"
+                            change="onResolvedDate"
+                            editable="false"
+                        />
+                        <Label
+                            id="_IDGenLabel27"
+                            text="Resolved Time"
+                        />
+                        <TimePicker
+                            id="ResolvTime_Id"
+                            value="{ComplaintsModel>/ResolvedTime}"
+                            placeholder="Enter Time"
+                            change="onResolvedTime"
+                            editable="false"
+                            displayFormat="hh:mm:ss a"
+                            valueFormat="hh:mm:ss a"
+                        />
+
+                        <core:Title
+                            id="_IDGenTitle4"
+                            text="Deputation Details"
+                        />
+                        <Label
+                            id="MsvStrtDat_Id"
+                            text="MSV Start Date"
+                            required="false"
+                        />
+                        <DatePicker
+                            id="MSD_Id"
+                            value="{ComplaintsModel>/MSVStartDate}"
+                            placeholder="Enter Date"
+                            change="onMSVStrtDate"
+                            editable="true"
+                            enabled="{ComplaintsModel>/MrdtVisible}"
+                        />
+                        <Label
+                            id="MsvStrtT_Id"
+                            text="MSV Start Time"
+                            required="false"
+                        />
+                        <TimePicker
+                            id="MST_Id"
+                            value="{ComplaintsModel>/MSVStartTime}"
+                            placeholder="Enter Time"
+                            change="onMSVStrtTime"
+                            editable="true"
+                            displayFormat="hh:mm:ss a"
+                            valueFormat="hh:mm:ss a"
+                            enabled="{ComplaintsModel>/MrdtVisible}"
+                        />
+                        <Label
+                            id="MsvRchD_Id"
+                            text="MSV Reach Date"
+                            required="false"
+                        />
+                        <DatePicker
+                            id="MRD_Id"
+                            value="{ComplaintsModel>/MSVReachDate}"
+                            placeholder="Enter Date"
+                            change="onMSVReachDate"
+                            enabled="{ComplaintsModel>/MrdtVisible}"
+                        />
+                        <Label
+                            id="MsvRchT_Id"
+                            text="MSV Reach Time"
+                            required="false"
+                        />
+                        <TimePicker
+                            id="MRT_Id"
+                            displayFormat="hh:mm:ss a"
+                            valueFormat="hh:mm:ss a"
+                            value="{ComplaintsModel>/MSVReachTime}"
+                            placeholder="Enter Time"
+                            change="onMSVReachTime"
+                           
+                            enabled="{ComplaintsModel>/MrdtVisible}"
+                        />
+                        <Label
+                            id="_IDGenLabel32"
+                            text="Time Taken MSV Reach"
+                        />
+                        <Input
+                            id="TTOnMSV_Id"
+                            value="{path: 'ComplaintsModel>/TimeTakenMSVReach', formatter:'.formatter.formatTimetaken'}"
+                            editable="false"
+                            enabled="{ComplaintsModel>/MrdtVisible}"
+                        />
+                        <Label
+                            id="reasnDly_Id"
+                            text="Reason Delay MSV Reach"
+                            required="false"
+                        />
+                        <Select
+                            id="rdn_Id"
+                            forceSelection="false"
+                            items="{ path: 'ComplaintsModel>/HoldData',
+					sorter: { path: 'HoldReason' }
+				}"
+                            enabled="{ComplaintsModel>/MrdtVisible}"
+                           
+                        >
+                            <core:Item
+                                id="_IDGenItem17"
+                                key="{ComplaintsModel>HoldReason}"
+                                text="{ComplaintsModel>HoldReason}"
+                            />
+                        </Select>
+                        
+                        <Label
+                            id="onRdDteLabl_Id"
+                            text="On Road Date"
+                            required="false"
+                        />
+                        <DatePicker
+                            id="OnRoadD_Id"
+                            value="{ComplaintsModel>/OnRoadDate}"
+                            placeholder="Enter Date"
+                            change="onRoadDatefn"
+                            editable="true"
+                            enabled="{ComplaintsModel>/MrdtVisible}"
+                        />
+                        <Label
+                            id="onRDTmeLbl_Id"
+                            text="On Road Time"
+                            required="false"
+                        />
+                        <TimePicker
+                            id="onRoadT_Id"
+                            value="{ComplaintsModel>/OnRoadTime}"
+                            displayFormat="hh:mm:ss a"
+                            valueFormat="hh:mm:ss a"
+                            placeholder="Enter Time"
+                            change="onRoadTimefn"
+                            editable="true"
+                            enabled="{ComplaintsModel>/MrdtVisible}"
+                        />
+                        <Label
+                            id="_IDGenLabel36"
+                            text="Time Taken For On Road"
+                        />
+                        <Input
+                            id="TTOnRd_Id"
+                            value="{path: 'ComplaintsModel>/TimetakenOnRoad', formatter:'.formatter.formatTimetaken'}"
+                            editable="false"
+                            enabled="{ComplaintsModel>/MrdtVisible}"
+                        />
+                        <Label
+                            id="DlyRsnOnRd_Id"
+                            text="Delay Reason For On Road"
+                            required="false"
+                        />
+                        <Select
+                            id="dlrsn_Id"
+                            forceSelection="false"
+                            items="{ path: 'ComplaintsModel>/HoldData',
+					sorter: { path: 'HoldReason' }
+				}"
+                            enabled="{ComplaintsModel>/MrdtVisible}"
+                           
+                        >
+                            <core:Item
+                                id="_IDGenItem16"
+                                key="{ComplaintsModel>HoldReason}"
+                                text="{ComplaintsModel>HoldReason}"
+                            />
+                        </Select>                         
+                        <core:Title
+                            id="notesTitle_Id"
+                            text="Notes"
+                        />
+                        <Label
+                            id="NotesLabel_Id"
+                            text="Internal Notes"
+                            required="false"
+                        />
+                        <TextArea
+                            id="Notes_Id"
+                            value="{ComplaintsModel>/Notes}"
+                            height="150px"
+                            growing="true" growingMaxLines="4"
+                            enabled="{ComplaintsModel>/VisibleNotes}"
+                        /> 
+                        <core:Title
+                            id="_IDGenTitle7"
+                            text="Attachments"
+                        />
+                        <List
+                        id="List_Id"
+                            mode="Delete"
+                            items="{ComplaintsModel>/OrgAttachments}"
+                            growing="true"
+                            growingThreshold="4"
+                            growingScrollToLoad="false"
+                            delete="handleDeleteFiles"                  
+                        >
+                            <CustomListItem >
+                                <HBox >
+                                    <core:Icon
+                                        size="2rem"
+                                        src="sap-icon://documents"
+                                        class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom"
+                                    />
+                                    <Link
+                                    id="Link_Id"
+                                        text="{ComplaintsModel>Filename}"
+                                        press="onPressLink"
+                                    />
+                                </HBox>
+                            </CustomListItem>
+                            <headerToolbar>
+                                <OverflowToolbar >
+                                    <ToolbarSpacer  />
+                        <unified:FileUploader
+                        id="Attach_Id"
+                                        tooltip="Upload your file to the local server"
+                                        httpRequestMethod="Post"
+                                        maximumFilenameLength="255"
+                                        sendXHR="true"
+                                        useMultipart="false"
+                                        change="_onBeforeUploadFile"
+                                        uploadComplete="_onUploadFile"
+                                        sameFilenameAllowed="true"
+                                        uploadUrl= "/sap/opu/odata/sap/CV_ATTACHMENT_SRV/OriginalContentSet"
+                                        buttonOnly="true"
+                                        iconOnly="true"
+                                        icon="sap-icon://attachment"
+                                    />
+                                </OverflowToolbar>
+                            </headerToolbar>
+                        </List>
+                        <core:Title id="titlId" text="Logs"/>
+                        
+                        <Table id="idProductsTable"
+		inset="false"
+		items="{ComplaintsModel>/LogsData}">
+                      	<columns>
+			<Column id="_IDGenColumn"
+				width="12em">
+				<Text id="_IDGenText" text="User" />
+			</Column>
+			<Column id="_IDGenColumn1">
+				<Text id="_IDGenText1" text="Text" />
+			</Column>
+			<Column id="_IDGenColumn2" hAlign="End">
+				<Text id="_IDGenText2" text="Date/Time" />
+			</Column>
+					</columns>
+		<items>
+			<ColumnListItem id="_IDGenColumnListItem1" vAlign="Middle">
+				<cells>
+               <Text id="_IDGenText3" text="{ComplaintsModel>Language}"/>
+               <Text id="_IDGenText4" text="{ComplaintsModel>Text}"></Text>
+               <Text id="_IDGenText5" text="{ComplaintsModel>TextType}"></Text>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>   
+                    </f:content>
+                </f:SimpleForm>
+            </VBox>
+        </content>
+        <footer>
+            <Toolbar id="_IDGenToolbar">
+                <ToolbarSpacer id="_IDGenToolbarSpacer" />
+                <Button
+                    id="IdSave"
+                    type="Emphasized"
+                    text="Submit"
+                    press="onSavePress"
+                    enabled="true"
+                />
+            </Toolbar>
+        </footer>
+    </Page>
+</mvc:View>

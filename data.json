@@ -1,0 +1,12 @@
+{
+    "statusData":[
+        {"Id":"E0001", "status":"New/open"},
+        {"Id":"E0010", "status":"Awaiting Inspection"},
+        {"Id":"E0002", "status":"Work In Progress"},
+        {"Id":"E0011", "status":"Hold"},
+        {"Id":"E0004", "status":"Vehicle Delivered"},
+        {"Id":"E0005", "status":"Closed"},
+        {"Id":"E0006", "status":"Canceled"},
+        {"Id":"E0017", "status":"Reopen"}
+    ]
+}

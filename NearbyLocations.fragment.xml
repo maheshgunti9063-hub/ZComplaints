@@ -1,0 +1,93 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:t="sap.ui.table" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form">
+
+    <Dialog id="NearbyDialog"
+            title="{PlantVisible>/FormTitle}"
+            contentWidth="500px"
+            contentHeight="250px"
+            draggable="true"
+            resizable="true">
+<VBox visible="{PlantVisible>/NearLocTable}">
+        
+            <t:Table id="NearbyTable"
+                     rows="{NearbyModel>/results}"
+                     visibleRowCount="5"
+                     selectionMode="Single">
+
+                <t:columns>
+
+                    <!-- Plant Code -->
+                    <t:Column width="120px">
+                        <Label text="Plant Code"/>
+                        <t:template>
+                            <Link text="{NearbyModel>Dealer}" press="onGetPlantData"/>
+                        </t:template>
+                    </t:Column>
+<t:Column width="120px">
+                        <Label text="Plant Name"/>
+                        <t:template>
+                            <Text text="{NearbyModel>Dealer_Desc}" />
+                        </t:template>
+                    </t:Column>
+                    <!-- Distance -->
+                    <t:Column width="120px">
+                        <Label text="Distance (KM)"/>
+                        <t:template>
+                            <Text text="{NearbyModel>Distance}"/>
+                        </t:template>
+                    </t:Column>
+
+                </t:columns>
+
+            </t:Table>
+</VBox>
+<VBox visible="{PlantVisible>/NearLocForm}">
+<t:Table
+                     rows="{PlantModel>/}"
+                     visibleRowCount="5"
+                     selectionMode="None">
+
+                <t:columns>
+                    <t:Column width="auto">
+                        <Label text="Incharge Name"/>
+                        <t:template>
+                            <Link text="{PlantModel>Rsa_Incharge_Name}"/>
+                        </t:template>
+                    </t:Column>
+<t:Column width="120px">
+                        <Label text="Mobile No"/>
+                        <t:template>
+                            <Text text="{PlantModel>Rsa_Incharge_Mobile}" />
+                        </t:template>
+                    </t:Column>
+                    <!-- Distance -->
+                    <t:Column width="auto">
+                        <Label text="Email"/>
+                        <t:template>
+                            <Text text="{PlantModel>Rsa_Incharge_Email}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="auto">
+                        <Label text="Designation"/>
+                        <t:template>
+                            <Text text="{PlantModel>Rsa_Incharge_Designation}"/>
+                        </t:template>
+                    </t:Column>
+
+                </t:columns>
+
+            </t:Table>
+		
+</VBox>
+<beginButton>
+<Button text="{PlantVisible>/Text}" press="onBackPlantsTable"></Button>
+
+</beginButton>
+        <endButton>
+            <Button text="Close" press=".onCloseNearbyDialog"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>
